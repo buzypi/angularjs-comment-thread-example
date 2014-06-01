@@ -1,0 +1,26 @@
+#header {
+    background-color: #3276B1;
+    height: 45px;
+}
+
+#logo {
+    font-family: "Terminal Dosis";
+    font-size: 30px;
+    height: 45px;
+    letter-spacing: 2px;
+    line-height: 40px;
+    margin: 0 auto;
+    padding-left: 10px;
+    text-shadow: -1px 1px 1px #001421;
+}
+
+#logo a {
+    color: #EDF1F2;
+}
+
+.comment {
+    padding: 5px 20px;
+    background-color: #FFFFE2;
+    font-size: 12px;
+}
+

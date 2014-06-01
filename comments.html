@@ -1,0 +1,87 @@
+<!--
+Author: Gautham Pai (http://buzypi.in/)
+Copying this code is permitted provided this comment is retained
+-->
+<!doctype html>
+<html>
+    <head>
+		<title></title>
+        <link href='http://fonts.googleapis.com/css?family=Terminal+Dosis:200,500' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="master.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.5/angular.min.js"></script>
+        <script>
+            var app = angular.module('admin', []);
+            app.controller('CommentsController', function($scope, $compile) {
+                this.comments = [
+                    {
+                        description: "Description 1", 
+                        children: [
+                            {
+                                description: "Description 11"
+                            },
+                            {
+                                description: "Description 12"
+                            },
+                            {
+                                description: "Description 13",
+                                children: [
+                                    {
+                                        description: "Description 131"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {description: "Description 2"},
+                    {description: "Description 3"},
+                ];
+                this.newComment = {
+                    description: ''
+                };
+                this.showReply = function(comment) {
+                    if(this.currentCommentBeingReplied)
+                        this.currentCommentBeingReplied.showReply = false;
+                    comment.showReply = true;
+                    this.currentCommentBeingReplied = comment;
+                };
+                this.reply = function(comment) {
+                    if(!comment.children)
+                        comment.children = [];
+                    comment.children.push({description: angular.copy(this.newComment.description)});
+                    this.newComment.description = '';
+                    comment.showReply = false;
+                };
+            });
+        </script>
+        <style>
+        </style>
+    </head>
+    <body ng-app="admin" ng-controller="CommentsController as c">
+        <div id="header">
+            <div id="logo" class=""><a href="http://jnaapti.com/" style="text-decoration:none">jnaapti</a></div>
+        </div>
+        <div id="main-copy" class="container">
+            <script id="comments.template" type="text/ng-template">
+                <div class="comment">
+                    <div class="description">{{comment.description}}</div>
+                    <div class="action">
+                        <a href="" ng-click="c.showReply(comment)">reply</a>
+                    </div>
+                    <ng-include src="'comments.template'" ng-repeat="comment in comment.children"></ng-include>
+                    <div ng-if="comment.showReply">
+                        <textarea ng-focus="comment.showReply" ng-model="c.newComment.description"></textarea>
+                        <button ng-click="c.reply(comment)">reply</button>
+                    </div>
+                </div>
+            </script>
+            <ng-include src="'comments.template'" ng-repeat="comment in c.comments"></ng-include>
+            <div id="add-comment" style="display:none">
+                <textarea ng-model="c.newComment.description"></textarea>
+                <button ng-click="c.reply(c)">reply</button>
+            </div>
+        </div>
+    </body>
+</html>
+
