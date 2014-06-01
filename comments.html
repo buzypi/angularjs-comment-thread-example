@@ -64,25 +64,31 @@ Copying this code is permitted provided this comment is retained
             <div id="logo" class=""><a href="http://jnaapti.com/" style="text-decoration:none">jnaapti</a></div>
         </div>
         <div id="main-copy" class="container">
+            <h1>AngularJS - Comments Example</h1>
+            <p>This code was first disussed during the meetup conducted by jnaapti titled: "Quirks of Javascript". The page is styled using Bootstrap and should work in mobile browsers too.</p>
+            <p><strong>Note that comments here are not stored in the server - use our <a href="http://www.meetup.com/jnaapti/events/182565502/">meetup group</a> to post comments if any</strong></p>
             <script id="comments.template" type="text/ng-template">
                 <div class="comment">
-                    <div class="description">{{comment.description}}</div>
+                    <p>{{comment.description}}</p>
                     <div class="action">
-                        <a href="" ng-click="c.showReply(comment)">reply</a>
+                        <button class="btn btn-primary btn-xs" href="" ng-click="c.showReply(comment)">reply</a>
+                    </div>
+                    <div ng-if="comment.showReply">
+                        <div class="form-group">
+                            <textarea autofocus class="form-control" row="3" ng-focus="comment.showReply" ng-model="c.newComment.description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-danger" ng-click="c.reply(comment)">reply</button>
+                            <button class="btn btn-danger" ng-click="comment.showReply=false">cancel</button>
+                        </div>
                     </div>
                     <ng-include src="'comments.template'" ng-repeat="comment in comment.children"></ng-include>
-                    <div ng-if="comment.showReply">
-                        <textarea ng-focus="comment.showReply" ng-model="c.newComment.description"></textarea>
-                        <button ng-click="c.reply(comment)">reply</button>
-                    </div>
                 </div>
             </script>
             <ng-include src="'comments.template'" ng-repeat="comment in c.comments"></ng-include>
-            <div id="add-comment" style="display:none">
-                <textarea ng-model="c.newComment.description"></textarea>
-                <button ng-click="c.reply(c)">reply</button>
-            </div>
+            <p>Also check out "<a href="http://buzypi.in/project/bullsncows/index.html">Bulls and Cows</a>" app built using AngularJS</p>
         </div>
+        <div id="footer">brought to you by - (c) <a href="http://jnaapti.com/">jnaapti.com</a></div>
     </body>
 </html>
 
