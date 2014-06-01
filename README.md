@@ -1,7 +1,7 @@
 AngularJS Comments Thread Example
 =================================
 
-This snippet shows the power of AngularJS's use of recursive templates to render composite data like a comments thread. A comments thread is a good example as it has both lists and maps and also is recursive by nature.
+This snippet shows the power of AngularJS's use of recursive templates to render composite data like a comments thread. A comments thread is a good example as it has both lists and maps and also is composite by nature.
 
 The example also shows the data-binding abilities and controllers which are kept completely independent of presentation (UI) code.
 
